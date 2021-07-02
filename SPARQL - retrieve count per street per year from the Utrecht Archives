@@ -1,0 +1,18 @@
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+PREFIX dct: <http://purl.org/dc/terms/>
+PREFIX sw: <http://semanticweb.cs.vu.nl/2009/11/sem/>
+PREFIX wd: <http://www.wikidata.org/entity/>
+SELECT  *
+{
+  {
+    select ?street ?year (count (?year) as ?count) where
+    {
+    	?sub sw:hasBeginTimeStamp ?date.
+      	?sub dct:spatial ?street.
+  		BIND (YEAR(?date) AS ?year)
+  		FILTER regex(?street, "wiki")
+	}
+	group by ?street ?year
+    order by ?year
+  }
+}

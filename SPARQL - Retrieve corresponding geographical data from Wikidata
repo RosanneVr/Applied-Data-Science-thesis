@@ -1,0 +1,10 @@
+SELECT ?street ?streetLabel ?coords ?bagID ?city ?cityLabel ?citycoords ?s_class WHERE {
+  VALUES ?street {}
+  OPTIONAL {?street wdt:P625 ?coords.}
+  OPTIONAL {?street wdt:P5207 ?bagID . }
+  OPTIONAL {?street wdt:P131 ?city . }
+  ?street wdt:P31 ?s_class .
+  ?city wdt:P625 ?citycoords.
+  FILTER(?s_class = wd:Q79007 || ?s_class =  wd:Q2039348 || ?s_class = wd:Q3957)
+  SERVICE wikibase:label { bd:serviceParam wikibase:language "[AUTO_LANGUAGE],nl". }
+}
